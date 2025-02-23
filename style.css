@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+.stock-info {
+    margin-top: 30px;
+}
+
+.stock-item {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1.2em;
+    width: 250px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+.stock-details {
+    margin-top: 30px;
+}
+
+#stockName {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#stockPrice {
+    font-size: 1.3em;
+}
+
+#stockChange {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+#stockChange.up {
+    color: green;
+}
+
+#stockChange.down {
+    color: red;
+}

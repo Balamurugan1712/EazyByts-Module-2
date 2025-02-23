@@ -1,78 +1,50 @@
-let portfolio = {};
-let stockPrices = {
-    AAPL: 145,  // Example stock prices
-    TSLA: 650,
-    GOOGL: 2750
-};
+// Simulate a user database for login/signup
+const users = [
+    { email: 'user@example.com', password: 'password123' }
+];
 
-document.getElementById("trading-form").addEventListener("submit", function(event) {
+// Handle login form submission
+document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const stockSymbol = document.getElementById("stock").value.toUpperCase();
-    const quantity = parseInt(document.getElementById("quantity").value);
+    // Simulate checking credentials
+    const user = users.find(u => u.email === email && u.password === password);
+    const loginResponse = document.getElementById('login-response');
 
-    if (stockSymbol && quantity) {
-        // Simulate buying the stock
-        if (!portfolio[stockSymbol]) {
-            portfolio[stockSymbol] = { quantity: 0, purchasePrice: stockPrices[stockSymbol] };
-        }
-        portfolio[stockSymbol].quantity += quantity;
-
-        // Update trading response
-        document.getElementById("trading-response").innerHTML = `You bought ${quantity} shares of ${stockSymbol}.`;
-
-        // Update portfolio info
-        updatePortfolio();
-        updatePerformance();
+    if (user) {
+        loginResponse.innerHTML = 'Login successful!';
+        setTimeout(() => window.location.href = 'index.html', 1000); // Redirect to dashboard
+    } else {
+        loginResponse.innerHTML = 'Invalid email or password.';
     }
 });
 
-// Update the portfolio section
-function updatePortfolio() {
-    const portfolioInfo = document.getElementById("portfolio-info");
-    let portfolioText = "<h3>Your Portfolio:</h3>";
+// Handle signup form submission
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
 
-    if (Object.keys(portfolio).length === 0) {
-        portfolioText += "<p>No stocks purchased yet.</p>";
-    } else {
-        Object.keys(portfolio).forEach(stock => {
-            const stockInfo = portfolio[stock];
-            portfolioText += `<p>${stock}: ${stockInfo.quantity} shares</p>`;
-        });
+    const signupResponse = document.getElementById('signup-response');
+
+    // Basic validation
+    if (password !== confirmPassword) {
+        signupResponse.innerHTML = 'Passwords do not match.';
+        return;
     }
 
-    portfolioInfo.innerHTML = portfolioText;
-}
+    // Simulate user creation
+    users.push({ email, password });
+    signupResponse.innerHTML = 'Signup successful!';
+    setTimeout(() => window.location.href = 'login.html', 1000); // Redirect to login page
+});
 
-// Update the performance section
-function updatePerformance() {
-    const performanceInfo = document.getElementById("performance-info");
-    let performanceText = "<h3>Portfolio Performance:</h3>";
-    let totalValue = 0;
-    let totalInvested = 0;
-
-    if (Object.keys(portfolio).length === 0) {
-        performanceText += "<p>No performance data available.</p>";
-    } else {
-        Object.keys(portfolio).forEach(stock => {
-            const stockInfo = portfolio[stock];
-            const currentPrice = stockPrices[stock];
-            const stockValue = currentPrice * stockInfo.quantity;
-            const investedAmount = stockInfo.purchasePrice * stockInfo.quantity;
-
-            totalValue += stockValue;
-            totalInvested += investedAmount;
-
-            performanceText += `<p>${stock}: 
-                                    ${stockInfo.quantity} shares at $${currentPrice} 
-                                    (Invested: $${investedAmount.toFixed(2)}, Current: $${stockValue.toFixed(2)})</p>`;
-        });
-
-        const profitLoss = totalValue - totalInvested;
-        performanceText += `<h3>Total Portfolio Value: $${totalValue.toFixed(2)}</h3>`;
-        performanceText += `<h3>Total Invested: $${totalInvested.toFixed(2)}</h3>`;
-        performanceText += `<h3>Profit/Loss: $${profitLoss.toFixed(2)}</h3>`;
-    }
-
-    performanceInfo.innerHTML = performanceText;
-}
+// Handle logout action on dashboard
+document.getElementById('logout')?.addEventListener('click', function(event) {
+    event.preventDefault();
+    // Simply redirect to login page for this example
+    window.location.href = 'login.html';
+});

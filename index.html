@@ -4,27 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="dashboard-container">
         <header>
             <h1>Stock Market Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="#trading">Trading</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#performance">Performance</a></li>
+                </ul>
+            </nav>
         </header>
 
-        <div class="stock-info">
-            <div class="stock-item">
-                <input type="text" id="symbol" placeholder="Enter stock symbol" />
-                <button onclick="getStockData()">Get Data</button>
-            </div>
+        <main>
+            <!-- Trading Section -->
+            <section id="trading">
+                <h2>User Trading</h2>
+                <form id="trading-form">
+                    <label for="stock">Stock Symbol:</label>
+                    <input type="text" id="stock" name="stock" required>
 
-            <div class="stock-details">
-                <div id="stockName"></div>
-                <div id="stockPrice"></div>
-                <div id="stockChange"></div>
-            </div>
-        </div>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" required>
+
+                    <button type="submit">Buy Stock</button>
+                </form>
+                <div id="trading-response"></div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section id="portfolio">
+                <h2>Portfolio Management</h2>
+                <div id="portfolio-info">
+                    <p>No stocks purchased yet.</p>
+                </div>
+            </section>
+
+            <!-- Performance Tracking Section -->
+            <section id="performance">
+                <h2>Portfolio Performance</h2>
+                <div id="performance-info">
+                    <p>No performance data available.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Stock Market Dashboard</p>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
